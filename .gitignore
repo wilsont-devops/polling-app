@@ -1,0 +1,24 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+*.db
+*.sqlite3
+instance/
+.vscode/
+.idea/
+.DS_Store
+*.log
+```// filepath: /workspaces/codespaces-blank/polling-app/.gitignore
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+*.db
+*.sqlite3
+instance/
+.vscode/
+.idea/
+.DS_Store
