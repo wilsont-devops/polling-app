@@ -41,4 +41,21 @@ def results():
     return jsonify(results)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True)    # ...existing code...
+    
+    @app.route('/vote', methods=['POST'])
+    def vote():
+        choice = request.json.get('choice')
+        user_ip = request.remote_addr
+        voted_key = f"poll:voted:{user_ip}"
+        if not choice:
+            return jsonify({'error': 'No choice provided'}), 400
+        if not r.hexists(POLL_KEY, choice):
+            return jsonify({'error': 'Choice does not exist'}), 400
+        if r.exists(voted_key):
+            return jsonify({'error': 'You have already voted.'}), 403
+        r.hincrby(POLL_KEY, choice, 1)
+        r.set(voted_key, 1)
+        return jsonify({'message': f'Vote for {choice} counted.'})
+    
+    # ...existing code...
